@@ -1,29 +1,40 @@
 #include "monty.h"
 
 /**
- * get_op_func - is a function pointer for list operations
- * done in the stack
- * Return: function pointer corresponding to operator given
+ * get_cmd - return the requisite opcode to run
+ * Return: pointer to the function that executes the opcode
  */
-
-void (*get_op_func(void))(stack_t **head, unsigned int line_number)
+void (*get_cmd(void))(stack_t **head, unsigned int line_number)
 {
-	instruction_t ops[] = {
+	int i;
+	instruction_t cmds[] = {
 		{"push", pusher},
 		{"pall", paller},
 		{"pint", pinter},
+		{"pop", popper},
+		{"nop", nopper},
+		{"swap", swapper},
+		{"add", adder},
+		{"sub", subber},
+		{"div", divider},
+		{"mul", multpler},
+		{"mod", modder},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr},
+		{"stack", changemode},
+		{"queue", changemode},
 		{NULL, NULL}
 	};
 
-	int i = 0;
-
-	for (; ops[i].opcode; i++)
+	for (i = 0; cmds[i].opcode; i++)
 	{
-		if (strcmp(ops[i].opcode, var.cmd) == 0)
+		if (strcmp(cmds[i].opcode, var.cmd) == 0)
 			break;
 	}
 
-	return (ops[i].f);
+	return (cmds[i].f);
 }
 
 /**
@@ -38,7 +49,7 @@ void run_cmd(char *bufline)
 	var.cmd = strtok(bufline, DELIM);
 	if (var.cmd && var.cmd[0] != '#')
 	{
-		f = get_op_func();
+		f = get_cmd();
 		if (f)
 		{
 			if (strcmp(var.cmd, "push") == 0)
@@ -46,9 +57,6 @@ void run_cmd(char *bufline)
 			f(&(var.head), var.line_number);
 		}
 		else
-		{
-			error_hand(3, var.cmd, var.line_number), free_stack(); /*Free stack*/
-			exit(EXIT_FAILURE);
-		}
+			erro(3, var.line_number, var.cmd), free_stack();
 	}
 }

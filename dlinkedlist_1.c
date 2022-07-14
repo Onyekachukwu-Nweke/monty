@@ -2,119 +2,105 @@
 #include "lists.h"
 
 /**
- * print_dlistint - prints all the node in
- * a doubly linked list
- * @h: head pointer
+ * dlistint_len - returns the number of elements
+ *                  in a doubly linked list
+ * @h: head pointer to the list
  *
- * Return: number of nodes in the list or NULL.
- *
+ * Return: number of elements
  */
-size_t print_dlistint(const stack_t *h)
+size_t dlistint_len(const stack_t *h)
 {
-	size_t num;
-	const stack_t *tmp = h;
+	size_t i = 0;
 
-	if (tmp == NULL)
-		error_hand(4);
-
-	num = 0;
-
-	while (tmp != NULL)
+	while (h)
 	{
-		printf("%d\n", tmp->n);
-		num++;
-		tmp = tmp->next;
+		i++;
+		h = h->next;
 	}
 
-	return (num);
+	return (i);
 }
 
 /**
- * add_dnodeint - function that add an
- * element at the beginning of the list
+ * add_dnodeint - adds a new node at the
+ *          beginning of a doubly linked list
+ * @head: head double pointer to the list
+ * @n: int data to insert in the new node
  *
- * @head: reference to head pointer
- * @n: data
- *
- * Return: address of new node or NULL.
- *
+ * Return: the address of the new element, or NULL if it failed
  */
-
 stack_t *add_dnodeint(stack_t **head, const int n)
 {
-	stack_t *new_node = (stack_t *)malloc(sizeof(stack_t));
+	stack_t *new = malloc(sizeof(stack_t));
+	
+	if (!new)
+		erro(4);
 
-	if (!new_node)
-		error_hand(4);
+	new->n = n;
 
-	new_node->n = n;
-	new_node->next = *head;
-	new_node->prev = NULL;
+	if (!(*head))
+	{
+		*head = new;
+		new->next = NULL;
+		new->prev = NULL;
+		return (new);
+	}
 
-	if ((*head) != NULL)
-		(*head)->prev = new_node;
+	new->next = *head;
+	new->prev = NULL;
+	(*head)->prev = new;
+	*head = new;
 
-	(*head) = new_node;
+	return (new);
+}
+
+/**
+ * add_dnodeint_end - adds a new node at the end
+ *                  of a doubly linked list
+ * @head: head double pointer to the list
+ * @n: int data to insert in the new node
+ *
+ * Return: the address of the new element, or NULL if it failed
+ */
+stack_t *add_dnodeint_end(stack_t **head, const int n)
+{
+	stack_t *last = *head;
+	stack_t *new = malloc(sizeof(stack_t));
+
+	if (!new)
+		return (NULL);
+
+	new->n = n;
+	new->next = NULL;
+
+	if (!(*head))
+	{
+		*head = new;
+		new->prev = NULL;
+		return (new);
+	}
+
+	while (last->next)
+		last = last->next;
+
+	last->next = new;
+	new->prev = last;
 
 	return (*head);
 }
 
 /**
- * add_dnodeint_end - function that an
- * element at the end of a list
- *
- * @head: reference to the head pointer
- * @n: data
- *
- * Return: address of new element or NULL.
- *
+ * free_dlistint - frees a doubly linked list
+ * @head: head pointer to the list
  */
-
-stack_t *add_dnodeint_end(stack_t **head, const int n)
-{
-	stack_t *end_node = (stack_t *)malloc(sizeof(stack_t));
-	stack_t *last = *head;
-
-	if (end_node == NULL)
-	{
-		error_hand(4);
-	}
-
-	end_node->n = n;
-	end_node->next = NULL;
-
-	if ((*head) == NULL)
-	{
-		end_node->prev = NULL;
-		(*head) = end_node;
-		return (end_node);
-	}
-
-	while (last->next != NULL)
-		last = last->next;
-
-	last->next = end_node;
-	end_node->prev = last;
-	return (end_node);
-}
-
-/**
- * free_dlistint - function that frees a
- * linked list
- *
- * @head: head pointer
- *
- */
-
 void free_dlistint(stack_t *head)
 {
-	stack_t *current = head;
-	stack_t *next;
+	stack_t *temp;
 
-	while (current != NULL)
+	while (head)
 	{
-		next = current->next;
-		free(current);
-		current = next;
+		temp = head->next;
+		free(head);
+		head = temp;
 	}
 }

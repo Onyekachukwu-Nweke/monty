@@ -3,47 +3,47 @@
 global_t var;
 
 /**
- * init_var - initializes the variables
+ * init_var - initializes the global variables
+ *
+ * Return: no return
  */
-
 void init_var(void)
 {
-	var.head = NULL;
 	var.bufline = NULL;
 	var.cmd = NULL;
 	var.value = NULL;
+	var.head = NULL;
 	var.line_number = 0;
 	var.mode = 1;
 }
 
 /**
- * main - the entry point function in the
- * interpreter
- * @ac: argument counter
- * @av: argument value
- * Return: EXIT_SUCCESS
+ * main - Entry point
+ *
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 on success
  */
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
 	size_t size = 0;
 
-	if (ac != 2)
-		error_hand(1);
+	if (argc != 2)
+		erro(1);
 
 	init_var();
 
-	var.fd = fopen(av[1], "r");
+	var.fd = fopen(argv[1], "r");
 
 	if (!var.fd)
-		error_hand(2, av[1]);
+		erro(2, argv[1]);
 
 	while (getline(&var.bufline, &size, var.fd) != EOF)
 	{
 		var.line_number++;
 		run_cmd(var.bufline);
 	}
-	/*Free both stack, var and line*/
-	free_buf(), free_stack();
+	free_var(), free_stack();
 	fclose(var.fd);
 
 	return (EXIT_SUCCESS);

@@ -2,9 +2,9 @@
 #include "lists.h"
 
 /**
- * free_buf - free the global struct variable
+ * free_var - free the global struct variable
  */
-void free_buf(void)
+void free_var(void)
 {
 	if (var.bufline)
 		free(var.bufline);
