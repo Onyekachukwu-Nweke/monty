@@ -33,5 +33,8 @@ void error_hand(int code, ...)
 		case 5: /*Push Error*/
 			dprintf(STDERR_FILENO, PUSH, va_arg(param, int));
 			break;
+		case 6: /*Pint Error*/
+			dprintf(STDERR_FILENO, PINT, va_arg(param, int));
+			break;
 	}
 }

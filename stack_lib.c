@@ -24,6 +24,7 @@ char *invstg(char *operand, unsigned int line_number)
 		if (operand[i] > 47 && operand[i] < 58)
 			continue;
 		error_hand(5, line_number);
+		exit(EXIT_FAILURE);
 	}
 	return (operand);
 }
@@ -54,4 +55,18 @@ void paller(stack_t **head, unsigned int line_number)
 {
 	(void)line_number;
 	print_dlistint(*head);
+}
+
+/**
+ *
+ *
+ */
+void pinter(stack_t **head, unsigned int line_number)
+{
+	stack_t *start = *head;
+
+	if (!start)
+		error_hand(6, line_number);
+
+	fprintf(stdout, "%d\n", start->n);
 }

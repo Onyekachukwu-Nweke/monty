@@ -11,6 +11,7 @@ void (*get_op_func(void))(stack_t **head, unsigned int line_number)
 	instruction_t ops[] = {
 		{"push", pusher},
 		{"pall", paller},
+		{"pint", pinter},
 		{NULL, NULL}
 	};
 
@@ -45,6 +46,9 @@ void run_cmd(char *bufline)
 			f(&(var.head), var.line_number);
 		}
 		else
+		{
 			error_hand(3, var.cmd, var.line_number), free_stack(); /*Free stack*/
+			exit(EXIT_FAILURE);
+		}
 	}
 }

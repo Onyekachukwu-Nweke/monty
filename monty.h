@@ -19,6 +19,7 @@
 #define INVALID "L%d: unknown instruction %s\n"
 #define MALLOC "Error: malloc failed\n"
 #define PUSH "L%d: usage: push integer\n"
+#define PINT "L%d: can't pint, stack empty\n"
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -82,4 +83,5 @@ void free_stack(void);
 char *invstg(char *operand, unsigned int line_number);
 void pusher(stack_t **head, unsigned int line_number);
 void paller(stack_t **head, unsigned int line_number);
+void pinter(stack_t **head, unsigned int line_number);
 #endif /* End of Header File */
