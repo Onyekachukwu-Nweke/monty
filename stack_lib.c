@@ -68,5 +68,5 @@ void pinter(stack_t **head, unsigned int line_number)
 	if (!start)
 		error_hand(6, line_number);
 
-	fprintf(stdout, "%d\n", start->n);
+	printf("%d\n", start->n);
 }
