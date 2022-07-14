@@ -2,7 +2,7 @@
 #include "lists.h"
 
 /**
- * free_var - free the global struct variable
+ * free_buf - free the global struct variable
  */
 void free_buf(void)
 {

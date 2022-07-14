@@ -16,8 +16,12 @@ void (*get_op_func(void))(stack_t **head, unsigned int line_number)
 
 	int i = 0;
 
-	while (ops[i].opcode != NULL && strcmp((ops[i].opcode), var.cmd) == 0)
-		i++;
+	for (; ops[i].opcode; i++)
+	{
+		if (strcmp(ops[i].opcode, var.cmd) == 0)
+			break;
+	}
+
 	return (ops[i].f);
 }
 
@@ -31,7 +35,7 @@ void run_cmd(char *bufline)
 	void (*f)(stack_t **head, unsigned int line_number);
 
 	var.cmd = strtok(bufline, DELIM);
-	if (var.cmd && var.cmd[0] != '$')
+	if (var.cmd && var.cmd[0] != '#')
 	{
 		f = get_op_func();
 		if (f)

@@ -10,6 +10,7 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <stddef.h>
 
 /* Program Macros and Error */
 #define DELIM " \r\t\n"

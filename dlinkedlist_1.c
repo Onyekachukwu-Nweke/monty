@@ -42,7 +42,7 @@ size_t print_dlistint(const stack_t *h)
 
 stack_t *add_dnodeint(stack_t **head, const int n)
 {
-	stack_t *new_node = malloc(sizeof(stack_t));
+	stack_t *new_node = (stack_t *)malloc(sizeof(stack_t));
 
 	if (!new_node)
 		error_hand(4);

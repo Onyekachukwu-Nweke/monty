@@ -46,8 +46,9 @@ void pusher(stack_t **head, unsigned int line_number)
 }
 
 /**
- *
- *
+ * paller - prints all the elements in the list
+ * @head: reference head node
+ * @line_number: line_number
  */
 void paller(stack_t **head, unsigned int line_number)
 {
