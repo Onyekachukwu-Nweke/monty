@@ -1,12 +1,16 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-/*External Library*/
+/*Standard External Library*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <stdarg.h>
 
-
+/* Program Macros */
+#define DELIM " \r\t\n"
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
