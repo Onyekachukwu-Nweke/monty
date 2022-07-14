@@ -3,7 +3,6 @@
 /**
  * get_op_func - is a function pointer for list operations
  * done in the stack
- * @c: operator argument
  * Return: function pointer corresponding to operator given
  */
 
@@ -11,8 +10,9 @@ void (*get_op_func(void))(stack_t **head, unsigned int line_number)
 {
 	instruction_t ops[] = {
 		{"push", pusher},
+		{"pall", paller},
 		{NULL, NULL}
-	}
+	};
 
 	int i = 0;
 
@@ -31,7 +31,7 @@ void run_cmd(char *bufline)
 	void (*f)(stack_t **head, unsigned int line_number);
 
 	var.cmd = strtok(bufline, DELIM);
-	if (var.cmd && var.cmd[0] != '#')
+	if (var.cmd && var.cmd[0] != '$')
 	{
 		f = get_op_func();
 		if (f)
@@ -41,6 +41,6 @@ void run_cmd(char *bufline)
 			f(&(var.head), var.line_number);
 		}
 		else
-			/*Error*/
+			error_hand(3, var.cmd, var.line_number), free_stack(); /*Free stack*/
 	}
 }

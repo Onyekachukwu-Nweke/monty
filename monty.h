@@ -2,6 +2,8 @@
 #define MONTY_H
 
 /*Standard External Library*/
+#define _POSIX_C_SOURCE 200809L
+#define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -9,8 +11,13 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-/* Program Macros */
+/* Program Macros and Error */
 #define DELIM " \r\t\n"
+#define USAGE "USAGE: monty file\n"
+#define NOACCESS "Error: Can't open file %s\n"
+#define INVALID "L%d: unknown instruction %s\n"
+#define MALLOC "Error: malloc failed\n"
+#define PUSH "L%d: usage: push integer\n"
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -58,10 +65,20 @@ typedef struct global_s
 	char *value;
 	FILE *fd;
 	stack_t *head;
-	char *op;
+	char *cmd;
 	int mode;
 	unsigned int line_number;
 } global_t;
 
 extern global_t var;
+
+/*Program Functions*/
+void init_var(void);
+void error_hand(int code, ...);
+void run_cmd(char *buf);
+void free_buf(void);
+void free_stack(void);
+char *invstg(char *operand, unsigned int line_number);
+void pusher(stack_t **head, unsigned int line_number);
+void paller(stack_t **head, unsigned int line_number);
 #endif /* End of Header File */

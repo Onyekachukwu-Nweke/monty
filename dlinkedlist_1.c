@@ -9,14 +9,13 @@
  * Return: number of nodes in the list or NULL.
  *
  */
-
 size_t print_dlistint(const stack_t *h)
 {
 	size_t num;
 	const stack_t *tmp = h;
 
 	if (tmp == NULL)
-		return (0);
+		error_hand(4);
 
 	num = 0;
 
@@ -45,11 +44,8 @@ stack_t *add_dnodeint(stack_t **head, const int n)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
 
-	if (new_node == NULL)
-	{
-		free(new_node);
-		return (NULL);
-	}
+	if (!new_node)
+		error_hand(4);
 
 	new_node->n = n;
 	new_node->next = *head;
@@ -81,8 +77,7 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
 
 	if (end_node == NULL)
 	{
-		free(end_node);
-		return (NULL);
+		error_hand(4);
 	}
 
 	end_node->n = n;
@@ -101,4 +96,25 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
 	last->next = end_node;
 	end_node->prev = last;
 	return (end_node);
+}
+
+/**
+ * free_dlistint - function that frees a
+ * linked list
+ *
+ * @head: head pointer
+ *
+ */
+
+void free_dlistint(stack_t *head)
+{
+	stack_t *current = head;
+	stack_t *next;
+
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
 }

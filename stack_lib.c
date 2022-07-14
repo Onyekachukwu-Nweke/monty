@@ -13,7 +13,7 @@ char *invstg(char *operand, unsigned int line_number)
 	int i, k;
 
 	if (operand == NULL)
-		/*Error code 5*/
+		error_hand(5, line_number);
 
 	i = 0;
 	k = (strlen(operand));
@@ -22,10 +22,10 @@ char *invstg(char *operand, unsigned int line_number)
 	for (; i < k; i++)
 	{
 		if (operand[i] > 47 && operand[i] < 58)
-			continue
-		/*Error code 5*/
+			continue;
+		error_hand(5, line_number);
 	}
-	return (operand)
+	return (operand);
 }
 
 /**
@@ -35,15 +35,22 @@ char *invstg(char *operand, unsigned int line_number)
  * Return: void
  */
 
-void pusher(stack **head, unsigned int line_number)
+void pusher(stack_t **head, unsigned int line_number)
 {
 	char *text;
 	int n;
 
 	text = invstg(var.value, line_number);
 	n = atoi(text);
-	if (var.mode == -1)
-		add_dnodeint_end(stack, n);
-	else
-		add_dnodeint(stack, n);
+	add_dnodeint(head, n);
+}
+
+/**
+ *
+ *
+ */
+void paller(stack_t **head, unsigned int line_number)
+{
+	(void)line_number;
+	print_dlistint(*head);
 }
