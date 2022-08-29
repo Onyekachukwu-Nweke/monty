@@ -17,6 +17,7 @@ EOF  help  quit
 $
 ```
 
-[ExtranoDev](https://www.github.com/ExtranoDev)
+[ExtranoDev](https://www.github.com/ExtranoDev) and [Kunrad](https://www.github.com/kunrad)
+[Airbnb](www.airbnb.com)
 ## Interpreter
 This project was built by Onyekachukwu Ejiofor Nweke
