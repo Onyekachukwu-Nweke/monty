@@ -2,14 +2,19 @@
 
 This syntax must be in your lists.h file
 
-Please include this syntax in your lists.h file
+How To use the console in Interactive mode
 ```
-  #include <stdio.h>
-  
-  typedef struct listint {
-    int n;
-    listint* next;
-  } listint;
+ $ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
 ```
 ## Interpreter
 This project was built by Onyekachukwu Ejiofor Nweke
