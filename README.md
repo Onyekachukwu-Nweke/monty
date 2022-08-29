@@ -18,6 +18,6 @@ $
 ```
 
 [ExtranoDev](https://www.github.com/ExtranoDev) and [Kunrad](https://www.github.com/kunrad)
-[Airbnb](www.airbnb.com)
+[Airbnb](https://www.airbnb.com)
 ## Interpreter
 This project was built by Onyekachukwu Ejiofor Nweke
