@@ -30,6 +30,16 @@ jobs:
           name: Run command - world
           command: echo "world"
 
+  print_name:
+    docker:
+      - image: cimg/node:12.16
+    steps:
+      - run:
+          name: Print my name
+          command: echo $NAME
+          environment:
+            NAME: Nweke Onyekachukwu Ejiofor
+
 workflows:
   welcome:
     jobs:
@@ -37,3 +47,4 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_name
