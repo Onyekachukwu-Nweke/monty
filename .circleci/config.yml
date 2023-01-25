@@ -42,7 +42,7 @@ jobs:
 
   save_hello_world_output:
     docker:
-      - image: cimg/base:2023.01
+      - image: cimg/node:12.16
     steps:
       - run:
           name: Save value to file
@@ -54,13 +54,13 @@ jobs:
 
   print_hello_world_output:
     docker:
-      - image: cimg/base:2023.01
+      - image: cimg/node:12.16
     steps:
       - attach_workspace:
           at: ~/
       - run:
           name: Save print out file value
-          command: cat output.txt
+          command: cat ~/output.txt
 
 workflows:
   welcome:
@@ -71,6 +71,8 @@ workflows:
             - print_hello
       - print_name
       - save_hello_world_output
-      - print_hello_world_output
+      - print_hello_world_output:
+          requires:
+            - save_hello_world_output
 
 # VS Code Extension Version: 1.5.1
