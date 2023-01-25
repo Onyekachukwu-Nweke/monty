@@ -40,6 +40,28 @@ jobs:
           environment:
             NAME: Nweke Onyekachukwu Ejiofor
 
+  save_hello_world_output:
+    docker:
+      - image: cimg/base:2023.01
+    steps:
+      - run:
+          name: Save value to file
+          command: echo "Hello World" > output.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - output.txt
+
+  print_hello_world_output:
+    docker:
+      - image: cimg/base:2023.01
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Save print out file value
+          command: cat output.txt
+
 workflows:
   welcome:
     jobs:
@@ -48,3 +70,7 @@ workflows:
           requires:
             - print_hello
       - print_name
+      - save_hello_world_output
+      - print_hello_world_output
+
+# VS Code Extension Version: 1.5.1
