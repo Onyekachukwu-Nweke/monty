@@ -48,6 +48,16 @@ jobs:
     steps:
       - print_pipeline_id
 
+  job_failure:
+    docker:
+      - image: cimg/node:12.16
+    steps:
+      - run: exit 1
+      - run:
+          name: on error
+          command: echo "Hello Error"
+          when: on_fail
+
 workflows:
   welcome:
     jobs:
@@ -56,5 +66,6 @@ workflows:
           requires:
             - save_hello_world_output
       - print_work_id
+      - job_failure
 
 # VS Code Extension Version: 1.5.1
